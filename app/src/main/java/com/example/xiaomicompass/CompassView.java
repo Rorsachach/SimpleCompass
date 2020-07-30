@@ -8,7 +8,6 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
@@ -55,6 +54,10 @@ public class CompassView extends View {
         invalidate();
     }
 
+    /**
+     * 初始化
+     * @param context
+     */
     public CompassView(Context context) {
         super(context);
         initView(context);
@@ -71,6 +74,10 @@ public class CompassView extends View {
 
     }
 
+    /**
+     * 具体初始化内容，包括各类画笔和各种图形
+     * @param context
+     */
     private void initView(Context context) {
         this.context = context;
 
@@ -151,7 +158,11 @@ public class CompassView extends View {
     }
 
 
-    // 测量填充
+    /**
+     * 对屏幕进行测量，并初始化画板大小
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -162,10 +173,6 @@ public class CompassView extends View {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
         width = Math.min(widthSize, heightSize);
-//        if(widthMode == MeasureSpec.UNSPECIFIED) // 父节点对子节点没有约束
-//            width = heightSize;
-//        else if(heightMode == MeasureSpec.UNSPECIFIED)
-//            width = widthSize;
 
         // 上方的 1/3 写字
         textHeight = width / 3;
@@ -184,6 +191,10 @@ public class CompassView extends View {
 
     }
 
+    /**
+     * 开始绘制图像
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -196,8 +207,12 @@ public class CompassView extends View {
 
     }
 
+    /**
+     * 绘制上方的度数文字
+     */
     private void drawText() {
 
+        // 判断度数大小来判断大致方向
         if(val <= 15 || val >= 345)
             text = "北";
         else if (val > 15 && val <= 75)
@@ -228,6 +243,10 @@ public class CompassView extends View {
 
     }
 
+
+    /**
+     * 绘制外部的圆圈
+     */
     private void drawOutCircle() {
         canvas.save(); // 保存当前画布状态
         int outsideTriangleHeight = 40; // 外圆小三角大小
@@ -268,6 +287,9 @@ public class CompassView extends View {
         canvas.restore();
     }
 
+    /**
+     * 绘制内部的圆圈
+     */
     private void drawInnerCircle() {
         canvas.save();
         int insideTriangleHeight = (outSideRadius - inSideRadius) /2;
@@ -275,7 +297,6 @@ public class CompassView extends View {
         canvas.rotate(-val, width/2, outSideRadius + textHeight);
         inSideTriangle.moveTo(width/2, textHeight + insideTriangleHeight);
         float sideLength = (float) (insideTriangleHeight / Math.sqrt(3) * 2);
-        Log.e("TAG",sideLength+"");
         inSideTriangle.lineTo(width/2 - sideLength/2, textHeight + (outSideRadius - inSideRadius));
         inSideTriangle.lineTo(width/2 + sideLength/2, textHeight + (outSideRadius - inSideRadius));
         inSideTriangle.close();
@@ -314,6 +335,9 @@ public class CompassView extends View {
         canvas.restore();
     }
 
+    /**
+     * 绘制刻度
+     */
     private void drawDegreeScale() {
         canvas.save();
 
@@ -397,6 +421,9 @@ public class CompassView extends View {
         canvas.restore();
     }
 
+    /**
+     * 绘制中间部分的文字
+     */
     private void drawCenterText() {
         canvas.save();
         String text = ((int) val) + "°";

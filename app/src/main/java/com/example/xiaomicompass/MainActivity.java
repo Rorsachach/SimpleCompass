@@ -8,6 +8,7 @@ import android.Manifest;
 import android.app.ActionBar;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TabHost;
@@ -20,6 +21,7 @@ public class MainActivity extends TabActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
         tabHost = getTabHost();
@@ -39,34 +41,6 @@ public class MainActivity extends TabActivity {
 
         tabHost.addTab(tabSpec2);
 
-        //checkPermission();
-
-    }
-
-    /**
-     * 权限申请部分
-     */
-
-    private static final String[] PERMISSIONS ={
-            Manifest.permission.CAMERA
-    };
-
-    private static final int REQUEST_COUNT = 12345;
-
-    private static final int PERMISSION_COUNT = 1;
-
-    private void checkPermission(){
-        for (int i = 0; i < PERMISSION_COUNT; i++) {
-            if(ContextCompat.checkSelfPermission(this, PERMISSIONS[i]) != PackageManager.PERMISSION_GRANTED){
-                if(ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSIONS[i])){
-
-                }else {
-                    Toast.makeText(this, "请允许获取此权限", Toast.LENGTH_SHORT).show();
-                    ActivityCompat.requestPermissions( this,PERMISSIONS,i);
-                }
-
-            }
-        }
     }
 
 }

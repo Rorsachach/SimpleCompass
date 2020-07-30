@@ -123,10 +123,10 @@ public class SpiritView extends View {
         super.onDraw(canvas);
         this.canvas = canvas;
 
-        getCurrentCircle();
-        drawText();
-        drawOutCircle();
-        drawInCircle();
+        getCurrentCircle(); // 获取当前圆信息
+        drawText(); // 绘制顶端文字
+        drawOutCircle(); // 绘制外圆
+        drawInCircle();  // 绘制内圆
         drawCurrentCircle();// 画可动圆
     }
 
@@ -157,6 +157,9 @@ public class SpiritView extends View {
         angle = (float)( Math.acos(tmp) * 180 / Math.PI);
     }
 
+    /**
+     * 绘制外圆
+     */
     private void drawOutCircle() {
         canvas.save();
 
@@ -171,6 +174,9 @@ public class SpiritView extends View {
         canvas.restore();
     }
 
+    /**
+     * 绘制内圆
+     */
     private void drawInCircle() {
         canvas.save();
 
@@ -197,6 +203,9 @@ public class SpiritView extends View {
         canvas.restore();
     }
 
+    /**
+     * 绘制可动圆
+     */
     private void drawCurrentCircle() {
         canvas.save();
 

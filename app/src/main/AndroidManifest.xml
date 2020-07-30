@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.xiaomicompass">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/compass_transparent_ic_launcher"
@@ -11,7 +9,6 @@
         android:roundIcon="@mipmap/compass_transparent_ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/newStryle">
-        <activity android:name=".CompassCameraActivity"></activity>
         <activity android:name=".SpiritLevelActivit" />
         <activity android:name=".CompassActivity" />
         <activity android:name=".MainActivity">
